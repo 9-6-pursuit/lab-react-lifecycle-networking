@@ -15,7 +15,7 @@ export const Employee = ({ employee }) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [employee.id]);
 
   const handleTogglePets = () => {
     setShowPets(!showPets);
