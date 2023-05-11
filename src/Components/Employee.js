@@ -1,13 +1,31 @@
 import PetList from "./PetList";
 import "./Employee.css";
+import { useEffect, useState } from "react";
 
-export const Employee = () => {
+export const Employee = ({ employee }) => {
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `https://resource-veterinarian-api.fly.dev/api/pets?employeeId=${employee.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setPets(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <article className="employee">
-      <h3>Staff Member Name</h3>
-      <h4>Staff Member Title</h4>
+      <h3>
+        {employee.firstName} {employee.lastName}
+      </h3>
+      <h4>{employee.title}</h4>
       <button>Show Pets</button>
-      <PetList />
+      <PetList pets={pets} />
     </article>
   );
 };
