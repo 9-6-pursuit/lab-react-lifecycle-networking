@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 
 export const Employee = ({ employee }) => {
   const [pets, setPets] = useState([]);
+  const [showPets, setShowPets] = useState(false);
 
   useEffect(() => {
-    fetch(
-      `https://resource-veterinarian-api.fly.dev/api/pets?employeeId=${employee.id}`
-    )
+    fetch(`https://resource-veterinarian-api.fly.dev/api/pets?employeeId=${employee.id}`)
       .then((response) => response.json())
       .then((data) => {
         setPets(data);
@@ -18,14 +17,19 @@ export const Employee = ({ employee }) => {
       });
   }, []);
 
+  const handleTogglePets = () => {
+    setShowPets(!showPets);
+  };
+
+  const prefix = employee.prefix ? `${employee.prefix} ` : '';
+  const postfix = employee.postfix ? `, ${employee.postfix}` : '';
+
   return (
     <article className="employee">
-      <h3>
-        {employee.firstName} {employee.lastName}
-      </h3>
+      <h3>{prefix}{employee.firstName} {employee.lastName}{postfix}</h3>
       <h4>{employee.title}</h4>
-      <button>Show Pets</button>
-      <PetList pets={pets} />
+      <button onClick={handleTogglePets}>{showPets ? 'Hide Pets' : 'Show Pets'}</button>
+      {showPets && <PetList pets={pets} />}
     </article>
   );
 };

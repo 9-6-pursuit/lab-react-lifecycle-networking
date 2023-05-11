@@ -19,7 +19,7 @@ export const EmployeeList = () => {
 
   return (
     <main>
-      <h2>♿️All Staff♿️</h2>
+      <h2>All Staff</h2>
       <section className="employee-list">
         {employees.map((employee) => {
           return <Employee key={employee.id} employee={employee} />;
