@@ -1,13 +1,29 @@
+import { useEffect, useState } from "react";
 import PetList from "./PetList";
 import "./Employee.css";
 
-export const Employee = () => {
+export const Employee = ({ employee }) => {
+  const [showPets, setShowPets] = useState(false);
+  const [pets, setPets] = useState([]);
+
+  const toggleShowPets = () => {
+    setShowPets(!showPets);
+  }
+
+  useEffect(() => {
+    fetch(`https://resource-veterinarian-api.fly.dev/api/pets?employeeId=${employee.id}`)
+    .then(response => response.json())
+    .then(petsData => setPets(petsData))
+  },[employee.id]);
+
+  let employeeName = `${employee.prefix ? `${employee.prefix} ` : ""}${employee.firstName} ${employee.lastName}${employee.postfix ? `, ${employee.postfix}` : ""}`;
+
   return (
     <article className="employee">
-      <h3>Staff Member Name</h3>
-      <h4>Staff Member Title</h4>
-      <button>Show Pets</button>
-      <PetList />
+      <h3>{employeeName}</h3>
+      <h4>{employee.title}</h4>
+      <button onClick={toggleShowPets}>{showPets ? "Hide Pets" : "Show Pets"}</button>
+      {showPets ? <PetList pets={pets}/> : <></>}
     </article>
   );
 };
