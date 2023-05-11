@@ -1,13 +1,24 @@
 import React from "react";
 import Employee from "./Employee";
 import "./EmployeeList.css";
+import { useEffect, useState } from "react";
 
-export const EmployeeList = () => {
+const EmployeeList = () => {
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    fetch("https://resource-veterinarian-api.fly.dev/api/employees")
+      .then((response) => response.json())
+      .then((data) => setEmployees(data));
+  }, []);
+
   return (
     <main>
       <h2>All Staff</h2>
       <section className="employee-list">
-        <Employee />
+        {employees.map((employee) => (
+          <Employee key={employee.id} employee={employee} />
+        ))}
       </section>
     </main>
   );
