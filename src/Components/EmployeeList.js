@@ -17,11 +17,15 @@ export const EmployeeList = () => {
         console.log("The response is ", response)
         setEmployees(response);
       })
+      .catch(err => {
+        throw new Error(err)
+      })
   }, [])
 
   return (
     <main>
       <h2>All Staff</h2>
+      <p> </p>
       <section className="employee-list">
         {employees.map(employee => {
           return (
