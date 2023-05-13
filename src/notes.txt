@@ -1,0 +1,13 @@
+
+
+
+John Goodman
+  8:17 PM
+API ENDPOINTS FOR THE VET’s OFFICE:
+BASE_URL = https://resource-veterinarian-api.fly.dev/api
+
+Get all employees: `${BASE_URL}/employees`
+Get a single employee: `${BASE_URL}/employees/${employee.id}`
+Get all pets: `${BASE_URL}/api/pets`
+Get all pets assigned to an employee: `${BASE_URL}/api/pets?employeeId=${employee.id}`
+
