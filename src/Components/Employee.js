@@ -22,10 +22,12 @@ export const Employee = ({employee}) => {
   const toggleShowPets = () => {
     setShowPets(!showPets)
   }
+  
+  let employeeName = `${employee.prefix ? `${employee.prefix} ` : ""}${employee.firstName} ${employee.lastName}${employee.postfix ? `, ${employee.postfix}` : ""}`;
 
   return (
     <article className="employee">
-      <h3>{employee.firstName} {employee.lastName}</h3>
+      <h3>{employeeName}</h3>
       <h4>{employee.title}</h4>
       <button onClick={toggleShowPets}>{showPets ? "Hide Pets" : "Show Pets"}</button>
       {showPets ? <PetList pets={pets}/> : <></>}
