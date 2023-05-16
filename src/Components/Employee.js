@@ -23,12 +23,11 @@ export const Employee = ({ employee }) => {
       {employee.prefix ? `${employee.prefix} ` : ""} {employee.firstName}  {employee.lastName} {employee.postfix ? `, ${employee.postfix}` : ""}
       </h3>
       <h4>{employee.title}</h4>
-      {showPets ? (
+      {showPets ? 
         <>
           <button onClick={toggleShowPets}>Show Pets</button>
           <PetList pets={pets} />
-        </>
-      ) : (
+        </> : ( 
         <button onClick={toggleShowPets}>Show Pets</button>
       )}
     </article>
